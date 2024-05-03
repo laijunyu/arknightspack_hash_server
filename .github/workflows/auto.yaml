@@ -21,7 +21,6 @@ jobs:
         with:  
           python-version: '3.10' # 根据需要选择Python版本  
       - name: set up lib
-        run: pip insatll hashlib
         run: pip install requests
 
       - name: Run your script  

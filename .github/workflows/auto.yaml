@@ -1,6 +1,7 @@
 name: Build and Release  
   
 on:  
+  workflow_dispatch:
   push:  
     tags:  
       - 'v*' # 只对带有"v"前缀的标签（如v1.0.0）触发  

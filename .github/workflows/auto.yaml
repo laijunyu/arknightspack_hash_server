@@ -1,0 +1,52 @@
+name: Build and Release  
+  
+on:  
+  push:  
+    tags:  
+      - 'v*' # 只对带有"v"前缀的标签（如v1.0.0）触发  
+  
+jobs:  
+  build-and-release:  
+    runs-on: ubuntu-latest  
+    steps:  
+      - name: Checkout code  
+        uses: actions/checkout@v3  
+        with:  
+          fetch-depth: 0 # 如果需要访问整个提交历史，请设置此值
+      
+  
+      - name: Set up Python (if your script is Python, for example)  
+        uses: actions/setup-python@v3  
+        with:  
+          python-version: '3.10' # 根据需要选择Python版本  
+      - name: set up lib
+        run: req.txt 
+
+      - name: Run your script  
+        run: server.py|  
+          # 假设你的脚本名为"run_me.py"，并且它生成一个名为"output.txt"的结果文件  
+          python run_me.py  
+          # 你可能还需要将结果文件移动到某个特定的目录或进行其他后处理  
+  
+      - name: Create Release  
+        id: create_release  
+        uses: actions/create-release@v1  
+        env:  
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # 这是一个内置的token，用于GitHub操作  
+        with:  
+          tag_name: ${{ github.ref }} # 这将使用触发此操作的标签名（例如v1.0.0）  
+          release_name: Release ${{ github.ref }}  
+          body: "Release description"  
+          draft: false  
+          prerelease: false  
+  
+      - name: Upload Release Asset  
+        id: upload-release-asset   
+        uses: actions/upload-release-asset@v1  
+        env:  
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
+        with:  
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # 从上一步获取上传URL  
+          asset_path: ./output.txt # 假设你的结果文件是output.txt  
+          asset_name: output.txt  
+          asset_content_type: text/plain

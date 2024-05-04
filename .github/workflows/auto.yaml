@@ -24,7 +24,7 @@ jobs:
         run: pip install requests
 
       - name: Run your script  
-        run: server.py
+        run: python server.py
           # 假设你的脚本名为"run_me.py"，并且它生成一个名为"output.txt"的结果文件    
           # 你可能还需要将结果文件移动到某个特定的目录或进行其他后处理  
   

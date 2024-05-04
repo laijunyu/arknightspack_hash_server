@@ -10,8 +10,8 @@ def download_file_with_requests(url, save_path):
                 file.write(chunk)  
   
 # 使用方法  
-url = 'http://example.com/somefile.zip'  
-save_path = 'path/to/your/directory/somefile.zip'  # 替换为你想要保存文件的路径  
+url = 'https://ak.hypergryph.com/downloads/android_lastest'  
+save_path = '.1.apk'  # 替换为你想要保存文件的路径  
 download_file_with_requests(url, save_path)
 
 def hash_file(file_path):  
@@ -31,5 +31,5 @@ def hash_file(file_path):
     return md5_name  
   
 # 调用函数，传入一个真实的文件路径  
-hash_result = hash_file("C:\\Users\\29581\\Documents\\Downloads\\1.exe")  # 替换为你的文件路径  
+hash_result = hash_file(".1.apk")  # 替换为你的文件路径  
 print(hash_result)

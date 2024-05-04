@@ -33,3 +33,8 @@ def hash_file(file_path):
 # 调用函数，传入一个真实的文件路径  
 hash_result = hash_file(".1.apk")  # 替换为你的文件路径  
 print(hash_result)
+# 使用 'w' 模式打开文件（如果文件不存在，则创建它）  
+# 'w' 模式会覆盖文件中已有的内容  
+with open('myfile.txt', 'w') as file:  
+    file.write(hash_result)  
+
